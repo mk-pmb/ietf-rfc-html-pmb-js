@@ -1,0 +1,31 @@
+{ "name": "ietf-rfc-html-pmb",
+  "version": "0.0.1",
+  "description": "Render IETF RFCs as HTML, with indentation interpreted.",
+  "keywords": [],
+
+  "author": "M.K. (https://github.com/mk-pmb)",
+  "homepage": "https://github.com/mk-pmb/ietf-rfc-html-pmb-js/#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mk-pmb/ietf-rfc-html-pmb-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mk-pmb/ietf-rfc-html-pmb-js/issues"
+  },
+  "contributors": [],
+
+  "private": false, "license": "ISC",
+
+  "main": "src/render.js",
+  "scripts": { "test": "nodejs test/all.js" },
+  "directories": { "test": "test" },
+
+  "dependencies": {},
+  "devDependencies": {
+    "equal-pmb": "^0.1.6",
+    "lib-demo-util-160404": "^0.1.13"
+  },
+
+
+  "npm vs. BOM = Unexpected token": "-*- coding: UTF-8 -*-"
+}

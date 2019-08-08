@@ -1,0 +1,25 @@
+﻿@charset "UTF-8";
+/* -*- coding: UTF-8, tab-width: 2 -*- */
+
+.fill {
+  position: absolute;
+  display: block;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  margin: 0px;
+}
+
+.heading a { text-decoration: inherit; color: inherit; }
+
+p.unknown {
+  white-space: pre;
+  border: 3px dashed red;
+  padding: 0.5em 1em;
+}
+
+chapter#toc {
+  white-space: pre;
+}
+
