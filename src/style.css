@@ -17,6 +17,7 @@ p.unknown {
   white-space: pre;
   border: 3px dashed red;
   padding: 0.5em 1em;
+  font-family: monospace;
 }
 
 chapter#toc {
