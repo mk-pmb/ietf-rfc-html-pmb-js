@@ -6,8 +6,13 @@
   <meta http-equiv="Content-Style-Type" content="text/css">
   <link rel="stylesheet" type="text/css" href="style.css">
 </head><body>
-  <p>If you see this for more than a few seconds,
-    please check your browser console for errors.</p>
-  <script src="render.js"></script>
-  <script src="jsonp.js"></script>
+  <form name="rfcnav" action="about:blank" method="get" target="_blank">
+    <p>RFC #: <input type="text" name="rfcnum" size="8">
+      <input type="submit" value="display"></p>
+  </form>
+  <hr>
+  <div id="out">
+    <script src="render.js"></script>
+    <script src="fetch.js"></script>
+  </div>
 </body></html>
