@@ -27,18 +27,21 @@ Where `text` should be a string or buffer with the contents of `rfcXXXX.txt`.
 
 
 
+Setup
+-----
+
+1. Download the RFCs you want to render.
+    * To mirror all of them, you can use `util/update_rfcs_via_rsync.sh`.
+1. If you want the web demo, try it and adjust webserver paths as needed.
+
+
 
 Usage
 -----
 
 * API: see [src/cli.js](src/cli.js)
 * CLI: `nodejs src/cli.js text-only/rfcXXXX.txt`
-* Web with JSONP: try [src/jsonp.html?rfcXXXX](src/jsonp.html?rfcXXXX)
-  * You might want to adjust the `jsonpUrl` manually first.
-  * If your RFC files aren't at `jsonpUrl` yet, the error message should
-    tell you where to put them.
-  * The `jsonp.php` could be a directory name, or an actual PHP script
-    like [this text file reader][phutility-jsonp].
+* Web: [src/fetch.html](src/fetch.html)
 
 
 <!--#toc stop="scan" -->
