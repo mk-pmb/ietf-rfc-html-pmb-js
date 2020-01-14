@@ -5,7 +5,7 @@
 function update_rfcs () {
   export LANG{,UAGE}=en_US.UTF-8  # make error messages search engine-friendly
   local SELFPATH="$(readlink -m "$BASH_SOURCE"/..)"
-  cd -- "$SELFPATH" || return $?
+  cd -- "$SELFPATH"/.. || return $?
   local OWNER="$(stat --format='%u:%g' .)"
   [ -n "$OWNER" ] || return $?
 
