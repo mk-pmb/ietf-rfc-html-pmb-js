@@ -1,5 +1,5 @@
 { "name": "ietf-rfc-html-pmb",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Render IETF RFCs as HTML, with indentation interpreted.",
   "keywords": [],
 
@@ -22,8 +22,6 @@
 
   "dependencies": {},
   "devDependencies": {
-    "equal-pmb": "^0.1.6",
-    "lib-demo-util-160404": "^0.1.13"
   },
 
 

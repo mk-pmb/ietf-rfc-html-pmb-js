@@ -54,7 +54,7 @@ Known issues
 * Needs more/better tests and docs.
 * Does anyone know an official, license-friendly source for
   [the XML versions](https://stackoverflow.com/a/49376946)
-  of the RFCs? Renderung them might be more reliable than guessing the
+  of the RFCs? Rendering them might be more reliable than guessing the
   meaning of whitespace. OTOH, XML parsing is a beast of its own.
 
 
