@@ -13,6 +13,8 @@
 
 .heading a { text-decoration: inherit; color: inherit; }
 
+span.page-footer { display: none; }
+
 p.unknown {
   white-space: pre;
   border: 3px dashed red;

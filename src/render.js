@@ -33,10 +33,9 @@
 
 
   EX = function renderRfcAsHtml(origText) {
-    var html = String(origText).replace(/\r/g, '').split(/\f/
-      ).map(EX.stripPageHeaderAndFooter
-      ).join('\n');
+    var html = String(origText).replace(/\r/g, '');
     html = xmlenc(html);
+    html = html.split(/\f/).map(EX.stripPageHeaderAndFooter).join('\n');
     function hhr(r, w) { html = html.replace(r, w); }
 
     hhr(/\nTable of [Cc]ontents?([\r\n]+ [ -~]+)+\n+/, EX.tableOfContents);
@@ -48,11 +47,25 @@
     hhr(/<chapter>\s*<\/chapter>/g, '');
 
     hhr(/<p> {3}([!-~])/g, '<p class="tx">$1');
+    hhr(/<p> {6}([\w\- ]{1,30}): ([!-~].*?)<\/p>/sg,
+      '<dl><dt>$1:</dt><dd>$2</dd></dl>');
+    hhr(/<\/dl>(\s*)<dl>/sg, '$1');
+    hhr(/<p> {6}([!-~].*?)<\/p>/sg, '<blockquote>$1</blockquote>');
     hhr(/<p>( *)/g, function unknownIndent(m, ind) {
       return ('<p class="unknown" indent="' + ind.length + '">') || m;
     });
     return html;
   };
+
+
+  EX.maxAnkleLines = 7; /*
+    When there are more than maxAnkleLines blank lines above the page footer,
+    we attribute the remainder to an intentional paragraph rather than mere
+    accidential text placement, based on the example date at the bottom
+    of page 4 of https://www.rfc-editor.org/rfc/rfc8594.txt (2023-03-02).
+    If we were to remove one more blank line here, the example code
+    would be merged with the next paragraph.
+  */
 
 
   EX.stripPageHeaderAndFooter = function addOnePage(pgText, pgIdx) {
@@ -62,7 +75,11 @@
     } else {
       tx = tx.replace(/^RFC \d+ {10,}[ -~]{0,120}\n+/, '');
     }
-    tx = tx.replace(/\n+\S[ -~]+\[Page \d+\]$/, '');
+    tx = tx.replace(/(\n+)(\S[ -~]+\[Page \d+\])$/, function footer(m, b, d) {
+      return m && ('\n<span class="page-footer"'
+        + ' data-blank-lines-above-page-footer="' + b.length + '"'
+        + '>' + d + '</span>') + b.slice(EX.maxAnkleLines);
+    });
     return tx;
   };
 
