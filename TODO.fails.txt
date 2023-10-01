@@ -1,0 +1,11 @@
+# ./util/wmirror.sh
+
+WARNING: combining -O with -r or -p will mean that all downloaded content
+will be placed in the single file you specified.
+
+WARNING: timestamping does nothing in combination with -O. See the manual
+for details.
+
+text-only/rfc7240.txt: No such file or directory
+text-only/rfc8144.txt: No such file or directory
+text-only/rfc9111.txt: No such file or directory
