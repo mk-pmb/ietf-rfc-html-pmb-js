@@ -47,10 +47,10 @@
     hhr(/<chapter>\s*<\/chapter>/g, '');
 
     hhr(/<p> {3}([!-~])/g, '<p class="tx">$1');
-    hhr(/<p> {6}([\w\- ]{1,30}): ([!-~].*?)<\/p>/sg,
+    hhr(/<p> {6}([\w\- ]{1,30}): ([!-~][\S\s]*?)<\/p>/g,
       '<dl><dt>$1:</dt><dd>$2</dd></dl>');
-    hhr(/<\/dl>(\s*)<dl>/sg, '$1');
-    hhr(/<p> {6}([!-~].*?)<\/p>/sg, '<blockquote>$1</blockquote>');
+    hhr(/<\/dl>(\s*)<dl>/g, '$1');
+    hhr(/<p> {6}([!-~][\S\s]*?)<\/p>/g, '<blockquote>$1</blockquote>');
     hhr(/<p>( *)/g, function unknownIndent(m, ind) {
       return ('<p class="unknown" indent="' + ind.length + '">') || m;
     });
