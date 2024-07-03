@@ -4,8 +4,38 @@
 function wmirror () {
   export LANG{,UAGE}=en_US.UTF-8  # make error messages search engine-friendly
   local URL="$1"
+  local FAILS=0
 
-  local W_OPTS=(
+  if [ "$#" -ge 2 ]; then
+    for URL in "$@"; do
+      echo
+      echo "<< $URL >>"
+      "$FUNCNAME" "$URL" && continue
+      (( FAILS += 1 ))
+      echo W: "Failure for '$1'. Total failures so far: $FAILS" >&2
+    done
+    [ "$FAILS" -le 100 ] || FAILS=100
+    return "$FAILS"
+  fi
+
+  local W_OPTS=()
+  mkdir --parents -- text-only || true
+
+  case "$URL" in # Is the URL arg an RFC number range?
+    *[^0-9-]* ) ;; # Nope, contains stuff other than digits and potential dash.
+    *-*-* ) ;; # Nope, too many dashes.
+    *- ) ;; # Nope, dash at end.
+    [0-9]*-[0-9]* )
+      "$FUNCNAME" $(seq --format='%04.0f' "${URL%-*}" "${URL#*-}")
+      return $?;;
+    [0-9]* )
+      wget "${W_OPTS[@]}" --output-document="text-only/rfc$URL.txt" \
+        -- "https://www.rfc-editor.org/rfc/rfc$URL.txt"
+      return $?;;
+  esac
+
+
+  W_OPTS+=(
     --mirror
     --no-parent
     --no-host-directories
@@ -15,14 +45,6 @@ function wmirror () {
     --reject-regex '\?C=[A-Z];O=[AD]$'
     --reject-regex '/index\.htm(l|)$'
     )
-
-  case "$URL" in # Is the URL arg just an RFC number?
-    *[^0-9]* ) ;; # Nope, contains non-digits
-    [0-9]* )
-      wget "${W_OPTS[@]}" --output-document="text-only/rfc$URL.txt" \
-        -- "https://www.rfc-editor.org/rfc/rfc$URL.txt" || return $?
-      return $?;;
-  esac
 
   case "$URL" in
     x2r:* )
@@ -47,5 +69,6 @@ function wmirror () {
     )
   wget "${W_OPTS[@]}" -- "$URL" || return $?
 }
+
 
 wmirror "$@"; exit $?

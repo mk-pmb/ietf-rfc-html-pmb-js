@@ -1,5 +1,5 @@
 { "name": "ietf-rfc-html-pmb",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "description": "Render IETF RFCs as HTML, with indentation interpreted.",
   "keywords": [],
 
@@ -25,5 +25,5 @@
   },
 
 
-  "npm vs. BOM = Unexpected token": "-*- coding: UTF-8 -*-"
+  "engines": { "npm": ">=7.0.0", "node": ">=16.0.0" }
 }
