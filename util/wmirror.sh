@@ -17,7 +17,7 @@ function wmirror () {
       echo "<< $URL >>"
       "$FUNCNAME" "$URL" && continue
       (( FAILS += 1 ))
-      echo W: "Failure for '$1'. Total failures so far: $FAILS" >&2
+      echo W: "Failure for '$URL'. Total failures so far: $FAILS" >&2
     done
     [ "$FAILS" -le 100 ] || FAILS=100
     return "$FAILS"
