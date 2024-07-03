@@ -4,11 +4,16 @@
 function wmirror () {
   export LANG{,UAGE}=en_US.UTF-8  # make error messages search engine-friendly
   local URL="$1"
-  local FAILS=0
 
   if [ "$#" -ge 2 ]; then
+    local FAILS=
     for URL in "$@"; do
-      echo
+      if [ -z "$FAILS" ]; then
+        FAILS=0
+      else
+        sleep "${COOLDOWN:-2s}"
+        echo
+      fi
       echo "<< $URL >>"
       "$FUNCNAME" "$URL" && continue
       (( FAILS += 1 ))
