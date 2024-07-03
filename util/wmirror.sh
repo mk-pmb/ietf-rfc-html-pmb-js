@@ -26,8 +26,9 @@ function wmirror () {
     *-*-* ) ;; # Nope, too many dashes.
     *- ) ;; # Nope, dash at end.
     [0-9]*-[0-9]* )
-      "$FUNCNAME" $(seq --format='%04.0f' "${URL%-*}" "${URL#*-}")
-      return $?;;
+      local FROM="${URL%-*}" UPTO="${URL#*-}"
+      [ "${FROM:0:1}" == 0 ] && FROM="--format=%0${#FROM}.0f $FROM"
+      "$FUNCNAME" $(seq $FROM $UPTO); return $?;;
     [0-9]* )
       wget "${W_OPTS[@]}" --output-document="text-only/rfc$URL.txt" \
         -- "https://www.rfc-editor.org/rfc/rfc$URL.txt"
